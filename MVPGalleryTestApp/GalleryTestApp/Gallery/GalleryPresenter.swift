@@ -27,12 +27,20 @@ enum CollectionType: Int {
     }
 }
 
+protocol DisplayView: class {
+    func displayImage(image: UIImage)
+    func display(name: String)
+    func display(description: String)
+}
+
+
+
 
 class GalleryPresenter {
     
-    
-    var gallery: MainGalleryViewController!
-    var currentCollection: CollectionType!
+    weak var view: MainGalleryViewController!
+    let router: Router
+    let currentCollection: CollectionType
     
     var imageArray = [OutImageEntity]()
     var disposeBag = DisposeBag()
@@ -43,9 +51,15 @@ class GalleryPresenter {
     var isLoading = false
     var isLoadFail = false
     
-    var baseUrl = "http://gallery.dev.webant.ru/api/"
-    var endPoint = "photos"
+    let baseUrl = "http://gallery.dev.webant.ru/api/"
+    let endPoint = "photos"
     
+    init(view: MainGalleryViewController, router: Router, currentCollection: CollectionType) {
+        self.view = view
+        self.router = router
+        self.currentCollection = currentCollection
+        
+    }
     
     typealias dataCallBack = (_ getInfo: ImagePaginationEntity?, _ message: String) -> Void
     
@@ -73,7 +87,7 @@ class GalleryPresenter {
                     let data = try JSONDecoder().decode(ImagePaginationEntity.self, from: response)
                     callback(data, "200")
                 } catch  let error {
-                    callback(nil, error.localizedDescription)
+                    callback(nil, String(describing: error.localizedDescription))
                 }
                 
             } onError: { (error) in
@@ -98,32 +112,32 @@ class GalleryPresenter {
                         guard let allGettingInfo = getInfo,
                               let images = allGettingInfo.data,
                               let pages = allGettingInfo.countOfPages else {return }
-                        if self.gallery.collectionViewRefreshControl.isRefreshing {
+                        if self.view.collectionViewRefreshControl.isRefreshing {
                             self.imageArray.removeAll()
-                            self.gallery.collectionViewRefreshControl.endRefreshing()
+                            self.view.collectionViewRefreshControl.endRefreshing()
                         }
-                        self.gallery.imageCollectionView.backgroundView = nil
+                        self.view.imageCollectionView.backgroundView = nil
                         self.countOfPages = pages
                         self.imageArray.append(contentsOf: images)
                         self.numberOfPage += 1
                         self.isLoading = false
                         self.isLoadFail = false
-                        self.gallery.imageCollectionView.reloadData()
+                        self.view.imageCollectionView.reloadData()
                         
                     case "no connection":
                         self?.isLoading = false
-                        self?.gallery.imageCollectionView.backgroundView = UINib(nibName: "NoInternet", bundle: nil).instantiate(withOwner: nil, options: nil).first as? UIView
-                        if self?.gallery.collectionViewRefreshControl.isRefreshing != nil {
+                        self?.view.imageCollectionView.backgroundView = UINib(nibName: "NoInternet", bundle: nil).instantiate(withOwner: nil, options: nil).first as? UIView
+                        if self?.view.collectionViewRefreshControl.isRefreshing != nil {
                             self?.imageArray.removeAll()
-                            self?.gallery.collectionViewRefreshControl.endRefreshing()
+                            self?.view.collectionViewRefreshControl.endRefreshing()
                             self?.isLoadFail = true
-                            self?.gallery.imageCollectionView.reloadData()
+                            self?.view.imageCollectionView.reloadData()
                         }
                         
                     default:
                         self?.isLoading = false
-                        self?.gallery.imageCollectionView.isHidden = true
-                        self!.gallery.badRequest(message: message)
+                        self?.view.imageCollectionView.isHidden = true
+                        self!.view.badRequest(message: message)
                     }
                 }
             }
@@ -151,12 +165,12 @@ class GalleryPresenter {
     func createCell(indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = gallery.imageCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCells", for: indexPath) as! CollectionViewCells
+            let cell = view.imageCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCells", for: indexPath) as! CollectionViewCells
             let image = imageArray[indexPath.item]
             cell.setupCell(url: (image.image?.name)!)
             return cell
         case 1:
-            let cell = gallery.imageCollectionView.dequeueReusableCell(withReuseIdentifier: "BottomLoadCollectionViewCell", for: indexPath) as! BottomLoadCollectionViewCell
+            let cell = view.imageCollectionView.dequeueReusableCell(withReuseIdentifier: "BottomLoadCollectionViewCell", for: indexPath) as! BottomLoadCollectionViewCell
             cell.bottomLoading(isNeedLoading: self.numberOfPage <= self.countOfPages)
             return cell
         default:
@@ -170,31 +184,21 @@ class GalleryPresenter {
         switch indexPath.section {
         case 0:
             if UIDevice.current.orientation.isLandscape {
-                return CGSize(width: gallery.imageCollectionView.frame.width / 4-15, height: gallery.imageCollectionView.frame.width / 4-15)
+                return CGSize(width: view.imageCollectionView.frame.width / 4-15, height: view.imageCollectionView.frame.width / 4-15)
             } else {
-                return CGSize(width: gallery.imageCollectionView.frame.width / 2-15, height: gallery.imageCollectionView.frame.width / 2-15)
+                return CGSize(width: view.imageCollectionView.frame.width / 2-15, height: view.imageCollectionView.frame.width / 2-15)
             }
         case 1:
-            return CGSize(width: gallery.imageCollectionView.frame.width, height: 50)
+            return CGSize(width: view.imageCollectionView.frame.width, height: 50)
         default:
             fatalError()
         }
     }
     
     func pushFullImageController(indexPath: IndexPath)  {
-        if self.isLoading {
-            return
-        }
-        self.isLoading = true
-        guard let id = self.imageArray[indexPath.item].id else { return }
         
-        
-        let vc = UIStoryboard(name: "ImageInfoStoryBoard", bundle: nil).instantiateViewController(identifier: "ImageInfoViewController") as? ImageInfoViewController
-        guard let viewController = vc else { return }
-        
-        self.gallery.navigationController?.pushViewController(viewController, animated: true)
-        self.gallery.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        let model = self.imageArray[indexPath.item]
+        self.router.openImageInfoView(model: model)
     }
 
     
@@ -214,15 +218,15 @@ class GalleryPresenter {
     
     func createAlertForBadRequest(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
-        let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (tryRequest) -> Void in
-            self.gallery.imageCollectionView.isHidden = false
+        let tryRequest = UIAlertAction(title: "Повторить запрос", style: UIAlertAction.Style.default) { (tryRequest) -> Void in
+            self.view.imageCollectionView.isHidden = false
             self.numberOfPage = 1
             if !self.isLoading {
                 self.getGalleryRequest()
             }
         }
-        alert.addAction(ok)
-        gallery.present(alert, animated: true, completion: nil)
+        alert.addAction(tryRequest)
+        view.present(alert, animated: true, completion: nil)
     }
 }
 

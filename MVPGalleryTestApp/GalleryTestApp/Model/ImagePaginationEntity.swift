@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ImagePaginationEntity: Decodable {
     var data: [OutImageEntity]?

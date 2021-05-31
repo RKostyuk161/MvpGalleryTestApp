@@ -9,8 +9,7 @@ import UIKit
 
 class MainGalleryViewController: UIViewController {
     
-    let galleryPresenter = GalleryPresenter()
-    let fullImagePresenter = FullImagePresenter()
+    var galleryPresenter: GalleryPresenter!
     
     let collectionViewRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -23,9 +22,11 @@ class MainGalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let currentCollection = self.tabBarController?.selectedIndex,
-              let type = CollectionType(rawValue: currentCollection) else { return }
-        self.galleryPresenter.currentCollection = type
+        guard let currentCollection = self.tabBarController?.selectedIndex else { return }
+        
+        let config = GalleryConfigurator()
+        config.config(view: self, currentCollection: currentCollection)
+        
         prepeareForLoad()
     }
     
@@ -43,7 +44,7 @@ class MainGalleryViewController: UIViewController {
         self.imageCollectionView.register(UINib(nibName: "CollectionViewCells", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCells")
         self.imageCollectionView.dataSource = self
         self.imageCollectionView.delegate = self
-        galleryPresenter.gallery = self
+        galleryPresenter.view = self
     }
     
     @objc func refresh(sender: UIRefreshControl) {
@@ -78,6 +79,7 @@ extension MainGalleryViewController: UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         galleryPresenter.createCell(indexPath: indexPath)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
