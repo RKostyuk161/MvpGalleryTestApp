@@ -18,7 +18,11 @@ class MainGalleryViewController: UIViewController {
     } ()
     
     
+    @IBOutlet weak var fullImageLoading: UIActivityIndicatorView!
+    
     @IBOutlet weak var imageCollectionView: UICollectionView!
+    
+    @IBOutlet weak var fullImageLoadingBackgroundView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,6 @@ class MainGalleryViewController: UIViewController {
         
         let config = GalleryConfigurator()
         config.config(view: self, currentCollection: currentCollection)
-        
         prepeareForLoad()
     }
     
@@ -45,6 +48,15 @@ class MainGalleryViewController: UIViewController {
         self.imageCollectionView.dataSource = self
         self.imageCollectionView.delegate = self
         galleryPresenter.view = self
+        fullImageLoading.isHidden = true
+        fullImageLoadingBackgroundView.isHidden = true
+        fullImageLoadingBackgroundView.layer.borderWidth = 0.5
+        fullImageLoadingBackgroundView.layer.cornerRadius = 10
+        fullImageLoadingBackgroundView.layer.masksToBounds = false
+        fullImageLoadingBackgroundView.layer.shadowColor = UIColor.black.cgColor
+        fullImageLoadingBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        fullImageLoadingBackgroundView.layer.shadowRadius = 6
+        fullImageLoadingBackgroundView.layer.shadowOpacity = 1
     }
     
     @objc func refresh(sender: UIRefreshControl) {
@@ -53,7 +65,20 @@ class MainGalleryViewController: UIViewController {
     }
     
     func badRequest(message: String) {
-        galleryPresenter.createAlertForBadRequest(message: message)
+        galleryPresenter.createAlertForBadRequest(message: message, isFullImageRequest: nil)
+    }
+    
+    func spin(isNeedToSpin: Bool) {
+        
+        if isNeedToSpin {
+            fullImageLoadingBackgroundView.isHidden = false
+            fullImageLoading.isHidden = false
+            fullImageLoading.startAnimating()
+        } else {
+            fullImageLoadingBackgroundView.isHidden = true
+            fullImageLoading.isHidden = true
+            fullImageLoading.stopAnimating()
+        }
     }
 }
 

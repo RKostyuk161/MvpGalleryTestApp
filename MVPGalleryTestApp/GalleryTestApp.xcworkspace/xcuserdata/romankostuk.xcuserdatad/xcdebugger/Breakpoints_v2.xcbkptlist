@@ -263,70 +263,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BA59B7DB-D366-4D9F-A020-BB3692049D8C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "getFullImageRequest(model:callback:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DFEEC7CC-F40E-4704-BD39-5A1E602BAFBE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "takeImage()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DFEEC7CC-F40E-4704-BD39-5A1E602BAFBE - 545e880bd0c757c1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GalleryTestApp.FullImageInfoPresenter.takeImage() -&gt; ()"
-                  moduleName = "GalleryTestApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/romankostuk/Desktop/MvpTestGalleryRepo/MvpGalleryTestApp/MVPGalleryTestApp/GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "536">
-               </Location>
-               <Location
-                  uuid = "DFEEC7CC-F40E-4704-BD39-5A1E602BAFBE - 877b02dc6b0e7020"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;, Swift.String) -&gt; () in GalleryTestApp.FullImageInfoPresenter.takeImage() -&gt; ()"
-                  moduleName = "GalleryTestApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/romankostuk/Desktop/MvpTestGalleryRepo/MvpGalleryTestApp/MVPGalleryTestApp/GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F25B8712-57A4-4E0C-AF84-323DD0560181"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -334,8 +270,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "getGalleryRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -343,47 +279,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "293C8A53-A9DC-47EA-9F7C-EFE119AFC1DC"
+            uuid = "6641DB2B-0FE2-4CB5-9C0A-6BFF75FACF5E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
+            filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "takeImage()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EC081B79-A79D-49AC-8B27-A84BB79BFBD8"
+            uuid = "9347168E-2C10-40C2-BC6C-49E35C4D1ED4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
+            filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "takeImage()"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BA2A4A30-FC52-4548-A8B7-1382072D4478"
+            uuid = "F770BFEC-3020-4318-ABC9-7079DF4BD9FE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
+            filePath = "GalleryTestApp/Gallery/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "openImageInfoView(model:image:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F9F261E-2CEC-4D49-9DE6-F09005F0694E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "getFullImageRequest(model:callback:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -391,48 +343,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "02A418A2-03B3-4FDF-BE1A-1A057C12088F"
+            uuid = "86CD892C-E3FA-4837-83F4-1F717F770082"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
+            filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "takeImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "54504586-968F-4150-AE4C-50EEB6A0E415"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "getFullImageRequest(model:callback:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "466CD0F2-58AA-4FEB-93C1-E2861A2877F2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GalleryTestApp/ImageInfo/FullInfoPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "getFullImageRequest(model:callback:)"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

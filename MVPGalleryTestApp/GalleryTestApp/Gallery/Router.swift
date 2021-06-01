@@ -17,9 +17,9 @@ class Router {
         self.view = view
     }
     
-    func openImageInfoView(model: OutImageEntity) {
+    func openImageInfoView(model: OutImageEntity, image: UIImage) {
         if let navController = self.view.navigationController {
-            Configurator.open(navigationController: navController, model: model)
+            Configurator.open(navigationController: navController, model: model, image: image)
         }
     }
 }

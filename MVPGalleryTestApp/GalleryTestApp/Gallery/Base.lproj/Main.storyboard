@@ -36,6 +36,23 @@
                                 <color key="textColor" red="0.1725490093" green="0.094117648900000003" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-wV-De2">
+                                <rect key="frame" x="157" y="400.5" width="100" height="100"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="SE7-w4-Ika">
+                                        <rect key="frame" x="31.5" y="31.5" width="37" height="37"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <color key="color" red="0.1725490093" green="0.094117648900000003" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="A8A-Hy-3OF"/>
+                                    <constraint firstItem="SE7-w4-Ika" firstAttribute="centerY" secondItem="Ejk-wV-De2" secondAttribute="centerY" id="NkQ-Xq-zGX"/>
+                                    <constraint firstAttribute="width" constant="100" id="VuE-Dm-yYd"/>
+                                    <constraint firstItem="SE7-w4-Ika" firstAttribute="centerX" secondItem="Ejk-wV-De2" secondAttribute="centerX" id="itA-ja-1tc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qv2-pe-wAU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -43,6 +60,8 @@
                             <constraint firstItem="qv2-pe-wAU" firstAttribute="trailing" secondItem="eBK-aX-FwN" secondAttribute="trailing" id="1fw-GM-mcd"/>
                             <constraint firstItem="g5j-H6-7ww" firstAttribute="leading" secondItem="qv2-pe-wAU" secondAttribute="leading" constant="10" id="2EH-24-bqp"/>
                             <constraint firstItem="eBK-aX-FwN" firstAttribute="leading" secondItem="qv2-pe-wAU" secondAttribute="leading" id="3uu-cm-Qfr"/>
+                            <constraint firstItem="Ejk-wV-De2" firstAttribute="centerY" secondItem="qv2-pe-wAU" secondAttribute="centerY" id="8qe-GR-DuJ"/>
+                            <constraint firstItem="Ejk-wV-De2" firstAttribute="centerX" secondItem="qv2-pe-wAU" secondAttribute="centerX" id="DG6-xD-WdR"/>
                             <constraint firstItem="qv2-pe-wAU" firstAttribute="bottom" secondItem="eBK-aX-FwN" secondAttribute="bottom" id="HcY-sV-ZPD"/>
                             <constraint firstItem="g5j-H6-7ww" firstAttribute="top" secondItem="qv2-pe-wAU" secondAttribute="top" id="aYQ-Xd-I88"/>
                             <constraint firstItem="qv2-pe-wAU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g5j-H6-7ww" secondAttribute="trailing" symbolic="YES" id="cTo-TS-Klc"/>
@@ -51,6 +70,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="26n-0E-zAe"/>
                     <connections>
+                        <outlet property="fullImageLoading" destination="SE7-w4-Ika" id="cyu-s3-AMZ"/>
+                        <outlet property="fullImageLoadingBackgroundView" destination="Ejk-wV-De2" id="Dvp-ZG-6kG"/>
                         <outlet property="imageCollectionView" destination="eBK-aX-FwN" id="bbP-qd-nBn"/>
                     </connections>
                 </viewController>
@@ -86,6 +107,24 @@
                                 <color key="textColor" red="0.1725490093" green="0.094117648900000003" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfX-ll-RmA">
+                                <rect key="frame" x="157" y="400.5" width="100" height="100"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="UsW-fW-NWa">
+                                        <rect key="frame" x="31.5" y="31.5" width="37" height="37"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.1725490093" green="0.094117648900000003" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="color" red="0.1725490093" green="0.094117648900000003" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="UsW-fW-NWa" firstAttribute="centerX" secondItem="IfX-ll-RmA" secondAttribute="centerX" id="0DX-Y6-kZ4"/>
+                                    <constraint firstAttribute="width" constant="100" id="4hz-dr-8g7"/>
+                                    <constraint firstAttribute="height" constant="100" id="CPQ-hp-4CH"/>
+                                    <constraint firstItem="UsW-fW-NWa" firstAttribute="centerY" secondItem="IfX-ll-RmA" secondAttribute="centerY" id="Cl2-ms-fRG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yae-Xk-jom"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -93,14 +132,18 @@
                             <constraint firstItem="A4L-O6-dZ5" firstAttribute="bottom" secondItem="Yae-Xk-jom" secondAttribute="bottom" id="9ZY-HR-RvA"/>
                             <constraint firstItem="Yae-Xk-jom" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mkd-3I-uhN" secondAttribute="trailing" symbolic="YES" id="ChM-zf-YHZ"/>
                             <constraint firstItem="A4L-O6-dZ5" firstAttribute="trailing" secondItem="Yae-Xk-jom" secondAttribute="trailing" id="TIN-PZ-M9u"/>
+                            <constraint firstItem="IfX-ll-RmA" firstAttribute="centerY" secondItem="Yae-Xk-jom" secondAttribute="centerY" id="VIi-Hz-6Kd"/>
                             <constraint firstItem="A4L-O6-dZ5" firstAttribute="top" secondItem="mkd-3I-uhN" secondAttribute="bottom" id="agU-Vu-RJh"/>
                             <constraint firstItem="mkd-3I-uhN" firstAttribute="leading" secondItem="Yae-Xk-jom" secondAttribute="leading" constant="10" id="cVJ-MP-unB"/>
                             <constraint firstItem="A4L-O6-dZ5" firstAttribute="leading" secondItem="Yae-Xk-jom" secondAttribute="leading" id="oTZ-p6-8bC"/>
+                            <constraint firstItem="IfX-ll-RmA" firstAttribute="centerX" secondItem="Yae-Xk-jom" secondAttribute="centerX" id="pMz-nQ-C1P"/>
                             <constraint firstItem="mkd-3I-uhN" firstAttribute="top" secondItem="Yae-Xk-jom" secondAttribute="top" id="ujh-cm-r4A"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qym-Om-X0G"/>
                     <connections>
+                        <outlet property="fullImageLoading" destination="UsW-fW-NWa" id="QLb-bt-HIR"/>
+                        <outlet property="fullImageLoadingBackgroundView" destination="IfX-ll-RmA" id="Ppx-g5-OXQ"/>
                         <outlet property="imageCollectionView" destination="A4L-O6-dZ5" id="8zj-os-q8R"/>
                     </connections>
                 </viewController>
@@ -183,6 +226,9 @@
     <resources>
         <image name="TodayIcon" width="18" height="23"/>
         <image name="flame" catalog="system" width="108" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

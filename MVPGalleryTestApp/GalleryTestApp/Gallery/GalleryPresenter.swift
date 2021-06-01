@@ -44,6 +44,8 @@ class GalleryPresenter {
     
     var imageArray = [OutImageEntity]()
     var disposeBag = DisposeBag()
+    var modelToRoute = OutImageEntity()
+    var imageToRoute = UIImage()
     
     var numberOfPage = 1
     var countOfPages = 1
@@ -51,6 +53,7 @@ class GalleryPresenter {
     var isLoading = false
     var isLoadFail = false
     
+    var fullImageUrl = "http://gallery.dev.webant.ru/media/"
     let baseUrl = "http://gallery.dev.webant.ru/api/"
     let endPoint = "photos"
     
@@ -62,7 +65,7 @@ class GalleryPresenter {
     }
     
     typealias dataCallBack = (_ getInfo: ImagePaginationEntity?, _ message: String) -> Void
-    
+    typealias imageCallBack = (_ getInfo: UIImage?, _ message: String) -> Void
     
     
     func galleryDataRequest(numberOfPage: Int, currentCollection: CollectionType, callback: @escaping dataCallBack) {
@@ -198,9 +201,50 @@ class GalleryPresenter {
     func pushFullImageController(indexPath: IndexPath)  {
         
         let model = self.imageArray[indexPath.item]
-        self.router.openImageInfoView(model: model)
+            getFullImageRequest(model: model) {
+                [weak self] (getInfo, message) in
+                switch message {
+                case "200":
+                    guard let self = self else { return }
+                    guard let allGettingInfo = getInfo else { return }
+                    let image = allGettingInfo
+                    self.modelToRoute = model
+                    self.imageToRoute = image
+                case "no connection":
+                    self?.createAlertForBadRequest(message: message, isFullImageRequest: true)
+                default:
+                    self?.createAlertForBadRequest(message: message, isFullImageRequest: true)
+                }
+            
+        }
     }
 
+    func getFullImageRequest(model: OutImageEntity, callback: @escaping imageCallBack) {
+        
+        guard let imageName = model.image?.name else { return }
+        let imageRequestUrl = self.fullImageUrl + String(describing: imageName)
+    
+        RxAlamofire.data(.get, imageRequestUrl)
+            .debug()
+            .do(afterCompleted: {
+                self.router.openImageInfoView(model: self.modelToRoute, image: self.imageToRoute)
+            },onSubscribe: { [weak self] in
+                self?.view.spin(isNeedToSpin: true)
+            }, onDispose: { [ weak self ] in
+                self?.view.spin(isNeedToSpin: false)
+
+            })
+            .subscribe { response in
+                guard let data = UIImage(data: response) else {
+                    callback(nil, "Ошибка сервера")
+                    return
+                }
+                callback(data, "200")
+            } onError: { (error) in
+                callback(nil, "no connection")
+            }
+            .disposed(by: disposeBag)
+    }
     
     func getNewPaginationRequest(indexPath: IndexPath)  {
         if indexPath.item == imageArray.count - 1 {
@@ -213,20 +257,29 @@ class GalleryPresenter {
         if !isLoading {
             self.getGalleryRequest()
         }
-
     }
     
-    func createAlertForBadRequest(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
-        let tryRequest = UIAlertAction(title: "Повторить запрос", style: UIAlertAction.Style.default) { (tryRequest) -> Void in
-            self.view.imageCollectionView.isHidden = false
-            self.numberOfPage = 1
-            if !self.isLoading {
-                self.getGalleryRequest()
+    func createAlertForBadRequest(message: String, isFullImageRequest: Bool?) {
+        if let isFullImage = isFullImageRequest {
+            if isFullImage {
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+                let cancel = UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil)
+                alert.addAction(cancel)
+                view.present(alert, animated: true, completion: nil)
             }
+            
+        } else {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+            let tryRequest = UIAlertAction(title: "Повторить запрос", style: UIAlertAction.Style.default) { (tryRequest) -> Void in
+                self.view.imageCollectionView.isHidden = false
+                self.numberOfPage = 1
+                if !self.isLoading {
+                    self.getGalleryRequest()
+                }
+            }
+            alert.addAction(tryRequest)
+            view.present(alert, animated: true, completion: nil)
         }
-        alert.addAction(tryRequest)
-        view.present(alert, animated: true, completion: nil)
     }
 }
 
