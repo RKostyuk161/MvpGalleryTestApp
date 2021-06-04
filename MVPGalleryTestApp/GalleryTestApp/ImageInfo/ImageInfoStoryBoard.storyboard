@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="896" translatesAutoresizingMaskIntoConstraints="NO" id="ThP-YZ-jDu">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="896" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="ThP-YZ-jDu">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IFm-gM-uff">
@@ -85,7 +85,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="WdP-Rs-smf"/>
                     <connections>
+                        <outlet property="fuillImageScrollView" destination="ThP-YZ-jDu" id="PCx-gR-vgj"/>
                         <outlet property="fullImage" destination="eR5-CS-dDe" id="jNT-PV-z3V"/>
+                        <outlet property="fullImageStackView" destination="IFm-gM-uff" id="8a1-RV-B5a"/>
                         <outlet property="imageDescription" destination="f5B-ud-m6c" id="ff9-Vb-vdM"/>
                         <outlet property="imageName" destination="UTW-Y2-W4w" id="bwo-4R-orr"/>
                     </connections>

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import Alamofire
 import RxSwift
 import RxAlamofire
@@ -183,14 +182,11 @@ class GalleryPresenter {
 
     
     
-    func setupSizeForCell(indexPath: IndexPath) -> CGSize {
+    func setupSizeForCell(indexPath: IndexPath, numberInRow: Int) -> CGSize {
         switch indexPath.section {
         case 0:
-            if UIDevice.current.orientation.isLandscape {
-                return CGSize(width: view.imageCollectionView.frame.width / 4-15, height: view.imageCollectionView.frame.width / 4-15)
-            } else {
-                return CGSize(width: view.imageCollectionView.frame.width / 2-15, height: view.imageCollectionView.frame.width / 2-15)
-            }
+            return CGSize(width: view.imageCollectionView.frame.width / CGFloat(numberInRow)-15, height: view.imageCollectionView.frame.width / CGFloat(numberInRow)-15)
+            
         case 1:
             return CGSize(width: view.imageCollectionView.frame.width, height: 50)
         default:

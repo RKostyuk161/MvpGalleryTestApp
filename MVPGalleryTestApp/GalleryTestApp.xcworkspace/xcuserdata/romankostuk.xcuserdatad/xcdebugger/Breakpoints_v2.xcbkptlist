@@ -270,8 +270,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "getGalleryRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -286,8 +286,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -302,8 +302,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "getFullImageRequest(model:callback:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,8 +350,8 @@
             filePath = "GalleryTestApp/Gallery/GalleryPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "pushFullImageController(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>

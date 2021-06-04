@@ -10,6 +10,7 @@ import UIKit
 class MainGalleryViewController: UIViewController {
     
     var galleryPresenter: GalleryPresenter!
+    var setNumberOfCellsInRow = 2
     
     let collectionViewRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -35,8 +36,9 @@ class MainGalleryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.reloadInputViews()
+        self.imageCollectionView.reloadData()
     }
     
     func prepeareForLoad() {
@@ -113,7 +115,7 @@ extension MainGalleryViewController: UICollectionViewDataSource,
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        galleryPresenter.setupSizeForCell(indexPath: indexPath)
+        galleryPresenter.setupSizeForCell(indexPath: indexPath, numberInRow: setNumberOfCellsInRow)
     }
     
     
@@ -123,5 +125,13 @@ extension MainGalleryViewController: UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            self.setNumberOfCellsInRow = 4
+        } else {
+            self.setNumberOfCellsInRow = 2
+        }
     }
 }

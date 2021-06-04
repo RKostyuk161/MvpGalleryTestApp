@@ -7,15 +7,9 @@
 
 import Foundation
 import UIKit
-import Alamofire
-import RxSwift
-import RxAlamofire
 
-protocol ImageInfoPresenterProtocol {
-    func viewDidLoad()
-}
 
-class FullImageInfoPresenter: ImageInfoPresenterProtocol {
+class FullImageInfoPresenter {
     
     weak var view: ImageInfoViewController!
     let model: OutImageEntity
