@@ -1,10 +1,3 @@
-//
-//  GalleryConfigurator.swift
-//  GalleryTestApp
-//
-//  Created by Роман on 28.05.2021.
-//
-
 import Foundation
 
 class GalleryConfigurator {
@@ -12,7 +5,7 @@ class GalleryConfigurator {
         
         guard let collectionType = CollectionType(rawValue: currentCollection) else { return }
         let router = Router(view)
-        let presenter = GalleryPresenter(view: view,
+        let presenter = MainGalleryPresenter(view: view,
                                          router: router,
                                          currentCollection: collectionType)
         view.galleryPresenter = presenter

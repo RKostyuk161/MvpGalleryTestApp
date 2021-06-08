@@ -1,16 +1,9 @@
-//
-//  ImageInfoViewController.swift
-//  GalleryTestApp
-//
-//  Created by Роман on 09.04.2021.
-//
-
 import UIKit
 
 
-class ImageInfoViewController: UIViewController, DisplayView, UIScrollViewDelegate {
+class ImageInfoViewController: UIViewController {
 
-    var presenter: FullImageInfoPresenter!
+    var presenter: ImageInfoPresenter!
     
     @IBOutlet weak var fullImage: UIImageView!
     @IBOutlet weak var imageName: UILabel!
@@ -36,8 +29,10 @@ class ImageInfoViewController: UIViewController, DisplayView, UIScrollViewDelega
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
     }
+}
+
+extension ImageInfoViewController: DisplayView {
     
     func displayImage(image: UIImage) {
         fullImage.image = image
@@ -50,9 +45,12 @@ class ImageInfoViewController: UIViewController, DisplayView, UIScrollViewDelega
     func display(description: String) {
         imageDescription.text = description
     }
+}
+
+extension ImageInfoViewController: UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return fullImageStackView
+        return self.fullImage
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -65,6 +63,10 @@ class ImageInfoViewController: UIViewController, DisplayView, UIScrollViewDelega
         self.imageName.isHidden = false
         self.imageDescription.isHidden = false
         self.reloadInputViews()
+        scrollView.layoutSubviews()
+        scrollView.setNeedsDisplay()
+        self.fullImageStackView.layoutSubviews()
+        self.fullImageStackView.updateConstraints()
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {

@@ -16,6 +16,12 @@ class CollectionViewCells: UICollectionViewCell {
         super.awakeFromNib()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.collectionViewImage.kf.cancelDownloadTask()
+        self.collectionViewImage.image = nil
+    }
+    
     func setupCell(url: String) {
         let url = (URL(string: "http://gallery.dev.webant.ru/media/" + url))
         collectionViewImage.kf.setImage(with: url)

@@ -1,16 +1,11 @@
-//
-//  MainGalleryViewController.swift
-//  GalleryTestApp
-//
-//  Created by Роман on 12.04.2021.
-//
-
 import UIKit
 
 class MainGalleryViewController: UIViewController {
     
-    var galleryPresenter: GalleryPresenter!
-    var setNumberOfCellsInRow = 2
+    var galleryPresenter: MainGalleryPresenter!
+    var setNumberOfCellsInRow: Int {
+        UIDevice.current.orientation.isLandscape ? 4 : 2
+    }
     
     let collectionViewRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -18,20 +13,20 @@ class MainGalleryViewController: UIViewController {
         return refreshControl
     } ()
     
-    
     @IBOutlet weak var fullImageLoading: UIActivityIndicatorView!
-    
     @IBOutlet weak var imageCollectionView: UICollectionView!
-    
     @IBOutlet weak var fullImageLoadingBackgroundView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let currentCollection = self.tabBarController?.selectedIndex else { return }
-        
-        let config = GalleryConfigurator()
-        config.config(view: self, currentCollection: currentCollection)
-        prepeareForLoad()
+        self.setupViewIfNeed()
+        self.prepeareForLoad()
+    }
+    
+    func setupViewIfNeed() {
+        guard self.galleryPresenter == nil,
+              let currentCollection = self.tabBarController?.selectedIndex else { return }
+        GalleryConfigurator().config(view: self, currentCollection: currentCollection)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,21 +39,25 @@ class MainGalleryViewController: UIViewController {
     func prepeareForLoad() {
         galleryPresenter.getGalleryRequest()
         self.imageCollectionView.refreshControl = collectionViewRefreshControl
-        self.imageCollectionView.register(UINib(nibName: "noConnectionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "noConnectionCollectionViewCell")
-        self.imageCollectionView.register(UINib(nibName: "BottomLoadCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BottomLoadCollectionViewCell")
-        self.imageCollectionView.register(UINib(nibName: "CollectionViewCells", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCells")
+        self.imageCollectionView.register(UINib(nibName: "noConnectionCollectionViewCell",
+                                                bundle: nil),
+                                          forCellWithReuseIdentifier: "noConnectionCollectionViewCell")
+        self.imageCollectionView.register(UINib(nibName: "BottomLoadCollectionViewCell",
+                                                bundle: nil), forCellWithReuseIdentifier: "BottomLoadCollectionViewCell")
+        self.imageCollectionView.register(UINib(nibName: "CollectionViewCells",
+                                                bundle: nil),
+                                          forCellWithReuseIdentifier: "CollectionViewCells")
         self.imageCollectionView.dataSource = self
         self.imageCollectionView.delegate = self
-        galleryPresenter.view = self
-        fullImageLoading.isHidden = true
-        fullImageLoadingBackgroundView.isHidden = true
-        fullImageLoadingBackgroundView.layer.borderWidth = 0.5
-        fullImageLoadingBackgroundView.layer.cornerRadius = 10
-        fullImageLoadingBackgroundView.layer.masksToBounds = false
-        fullImageLoadingBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        fullImageLoadingBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        fullImageLoadingBackgroundView.layer.shadowRadius = 6
-        fullImageLoadingBackgroundView.layer.shadowOpacity = 1
+        self.fullImageLoading.isHidden = true
+        self.fullImageLoadingBackgroundView.isHidden = true
+        self.fullImageLoadingBackgroundView.layer.borderWidth = 0.5
+        self.fullImageLoadingBackgroundView.layer.cornerRadius = 10
+        self.fullImageLoadingBackgroundView.layer.masksToBounds = false
+        self.fullImageLoadingBackgroundView.layer.shadowColor = UIColor.black.cgColor
+        self.fullImageLoadingBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        self.fullImageLoadingBackgroundView.layer.shadowRadius = 6
+        self.fullImageLoadingBackgroundView.layer.shadowOpacity = 1
     }
     
     @objc func refresh(sender: UIRefreshControl) {
@@ -71,7 +70,6 @@ class MainGalleryViewController: UIViewController {
     }
     
     func spin(isNeedToSpin: Bool) {
-        
         if isNeedToSpin {
             fullImageLoadingBackgroundView.isHidden = false
             fullImageLoading.isHidden = false
@@ -127,11 +125,11 @@ extension MainGalleryViewController: UICollectionViewDataSource,
         return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
     }
     
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-            self.setNumberOfCellsInRow = 4
-        } else {
-            self.setNumberOfCellsInRow = 2
-        }
-    }
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        if UIDevice.current.orientation.isLandscape {
+//            self.setNumberOfCellsInRow = 4
+//        } else {
+//            self.setNumberOfCellsInRow = 2
+//        }
+//    }
 }

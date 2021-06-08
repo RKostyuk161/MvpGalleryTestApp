@@ -1,10 +1,3 @@
-//
-//  Presenter.swift
-//  GalleryTestApp
-//
-//  Created by Роман on 24.05.2021.
-//
-
 import Foundation
 import Alamofire
 import RxSwift
@@ -32,10 +25,7 @@ protocol DisplayView: class {
     func display(description: String)
 }
 
-
-
-
-class GalleryPresenter {
+class MainGalleryPresenter {
     
     weak var view: MainGalleryViewController!
     let router: Router
@@ -81,15 +71,15 @@ class GalleryPresenter {
 
         }
         RxAlamofire.data(.get, baseUrl+endPoint, parameters: parametrs)
-            .debug()
+//            .debug()
             .subscribe { [weak self] response in
                 
                 guard self != nil else { return }
                 do {
                     let data = try JSONDecoder().decode(ImagePaginationEntity.self, from: response)
                     callback(data, "200")
-                } catch  let error {
-                    callback(nil, String(describing: error.localizedDescription))
+                } catch let error {
+                    callback(nil, String(describing: error.localizedDescription.description))
                 }
                 
             } onError: { (error) in
@@ -221,7 +211,7 @@ class GalleryPresenter {
         let imageRequestUrl = self.fullImageUrl + String(describing: imageName)
     
         RxAlamofire.data(.get, imageRequestUrl)
-            .debug()
+//            .debug()
             .do(afterCompleted: {
                 self.router.openImageInfoView(model: self.modelToRoute, image: self.imageToRoute)
             },onSubscribe: { [weak self] in
@@ -256,16 +246,14 @@ class GalleryPresenter {
     }
     
     func createAlertForBadRequest(message: String, isFullImageRequest: Bool?) {
-        if let isFullImage = isFullImageRequest {
-            if isFullImage {
-                let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Error",
+                                      message: message,
+                                      preferredStyle: UIAlertController.Style.alert)
+        if isFullImageRequest ?? false {
                 let cancel = UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil)
                 alert.addAction(cancel)
                 view.present(alert, animated: true, completion: nil)
-            }
-            
         } else {
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
             let tryRequest = UIAlertAction(title: "Повторить запрос", style: UIAlertAction.Style.default) { (tryRequest) -> Void in
                 self.view.imageCollectionView.isHidden = false
                 self.numberOfPage = 1

@@ -7,5 +7,6 @@ target 'GalleryTestApp' do
   pod 'Kingfisher', '~> 6.0'
   pod 'Alamofire', '~> 5.2'
   pod 'RxAlamofire'
+  pod "DBDebugToolkit"
 
 end

@@ -1,15 +1,7 @@
-//
-//  ImageInfoPresenter.swift
-//  GalleryTestApp
-//
-//  Created by Роман on 28.05.2021.
-//
-
-import Foundation
 import UIKit
 
 
-class FullImageInfoPresenter {
+class ImageInfoPresenter {
     
     weak var view: ImageInfoViewController!
     let model: OutImageEntity
@@ -20,7 +12,7 @@ class FullImageInfoPresenter {
         self.model = model
         self.image = image
     }
-        
+    
     func viewDidLoad() {
         self.view.displayImage(image: image)
         self.view.display(name: self.model.name ?? "")

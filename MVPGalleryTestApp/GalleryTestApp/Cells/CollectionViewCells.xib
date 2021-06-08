@@ -29,6 +29,11 @@
                 <constraint firstAttribute="bottom" secondItem="Ql7-Ob-k4x" secondAttribute="bottom" constant="1" id="hgh-bV-M1H"/>
             </constraints>
             <size key="customSize" width="207" height="162"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="smth">
+                    <integer key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="collectionViewImage" destination="Ql7-Ob-k4x" id="NLS-L9-0se"/>
             </connections>

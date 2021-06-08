@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.1)
+  - DBDebugToolkit (0.6.0)
   - Kingfisher (6.2.1)
   - RxAlamofire (6.1.1):
     - RxAlamofire/Core (= 6.1.1)
@@ -10,22 +11,25 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - DBDebugToolkit
   - Kingfisher (~> 6.0)
   - RxAlamofire
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - DBDebugToolkit
     - Kingfisher
     - RxAlamofire
     - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  DBDebugToolkit: 03eb3483da4daf03b853b83ade5a8da9c8b7aff4
   Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
 
-PODFILE CHECKSUM: 4ff307c3c5b02dd5678c07c0b381f6ac8251465d
+PODFILE CHECKSUM: fbfee35ccddb76e7285214f4941c812c3815bd36
 
 COCOAPODS: 1.10.1
